@@ -76,7 +76,7 @@ streamlit run app.py
 
 python train.py  # Train using base dataset
 python feedback_train.py  # Retrain with feedback
-
+```
 ---
 
 🙋‍♂️ Feedback & Contribution

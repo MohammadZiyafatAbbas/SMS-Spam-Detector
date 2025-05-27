@@ -2,7 +2,7 @@
 
 **SMS Spam Detector** is a beginner-friendly **Streamlit web application** that detects spam SMS messages using machine learning and natural language processing (NLP). It provides an intuitive interface for classifying messages as "Spam" or "Ham (Not Spam)" and allows users to provide real-time feedback to improve the model.
 
-![App Screenshot](./img/app.png)   
+![App Screenshot](sampleimg/app.png)   
 
 ## 🚀 Features
 

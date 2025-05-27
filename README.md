@@ -79,6 +79,7 @@ python feedback_train.py  # Retrain with feedback
 ---
 
 ### 🙋‍♂️ Feedback & Contribution
+
 Have suggestions or want to contribute?
 
 Fork this repo
@@ -97,7 +98,9 @@ sms spam detection, spam sms classifier, streamlit spam detector, python sms spa
 ---
 
 ### 📄 License
-This project is licensed under the MIT License.
+
+This project is licensed under the [MIT License](./LICENSE).
+
 
 ---
 

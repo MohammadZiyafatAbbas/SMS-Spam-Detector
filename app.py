@@ -146,7 +146,7 @@ def input_section():
     with col2:
         if st.button("🧹 Clear", use_container_width=True):
             st.session_state.clear()
-            st.experimental_rerun()
+            st.rerun()
 
 # --- Result Section ---
 def result_section():

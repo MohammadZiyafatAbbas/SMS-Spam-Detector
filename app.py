@@ -10,6 +10,10 @@ import pickle
 import pandas as pd
 from cleantext import clean
 from pathlib import Path
+import base64
+import requests
+import json
+import io
 
 # --- Load custom CSS ---
 def local_css(file_name):
@@ -56,25 +60,64 @@ def predict_spam(message):
     vect = vectorizer.transform([processed])
     return model.predict(vect)[0]
 
-# --- Save Feedback ---
+# --- Save Feedback to GitHub ---
 def save_feedback(message, prediction, correct_label):
-    feedback_path = Path("data/feedback.csv")
-    feedback_path.parent.mkdir(parents=True, exist_ok=True)
-
+    # Prepare new entry
     entry = {
         "message": [message],
         "model_prediction": [prediction],
         "user_feedback": [correct_label]
     }
-    df = pd.DataFrame(entry)
+    new_df = pd.DataFrame(entry)
 
-    try:
-        if feedback_path.exists():
-            df.to_csv(feedback_path, mode='a', index=False, header=False)
-        else:
-            df.to_csv(feedback_path, index=False)
-    except Exception as e:
-        st.error(f"❌ Could not save feedback: {e}")
+    # GitHub info
+    GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
+    GITHUB_USERNAME = st.secrets["GITHUB_USERNAME"]
+    REPO_NAME = st.secrets["REPO_NAME"]
+    BRANCH = st.secrets["BRANCH"]
+    FILE_PATH = st.secrets["FILE_PATH"]
+
+    url = f"https://api.github.com/repos/{GITHUB_USERNAME}/{REPO_NAME}/contents/{FILE_PATH}"
+
+    headers = {
+        "Authorization": f"token {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+
+    # Step 1: Fetch existing file (if exists)
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        content = base64.b64decode(response.json()["content"]).decode()
+        sha = response.json()["sha"]
+        existing_df = pd.read_csv(io.StringIO(content))
+        updated_df = pd.concat([existing_df, new_df], ignore_index=True)
+    elif response.status_code == 404:
+        # No file yet — start fresh
+        updated_df = new_df
+        sha = None
+    else:
+        st.error(f"❌ Error fetching file: {response.json()}")
+        return
+
+    # Step 2: Convert to CSV and encode
+    csv_data = updated_df.to_csv(index=False)
+    encoded = base64.b64encode(csv_data.encode()).decode()
+
+    # Step 3: Prepare payload
+    payload = {
+        "message": "Update feedback.csv from Streamlit app",
+        "content": encoded,
+        "branch": BRANCH
+    }
+    if sha:
+        payload["sha"] = sha
+
+    # Step 4: Push update to GitHub
+    put_response = requests.put(url, headers=headers, data=json.dumps(payload))
+    if put_response.status_code in [200, 201]:
+        st.success("✅ Feedback successfully saved to GitHub!")
+    else:
+        st.error(f"❌ Failed to update GitHub: {put_response.json()}")
 
 # --- UI Header ---
 def header_section():

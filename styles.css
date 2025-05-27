@@ -1,0 +1,88 @@
+/* Base styles */
+html, body, [class*="css"] {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    font-size: 15.5px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin: 0.5rem 0 1rem 0;
+}
+.header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    color: #2c3e50;
+}
+.subheader {
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+/* Section container */
+.stContainer {
+    background-color: #ffffff;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    margin-bottom: 1rem;
+}
+
+/* Reduce default Streamlit vertical space */
+.block-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* Text area (slightly smaller) */
+.stTextArea>textarea {
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 15px;
+    line-height: 1.4;
+    min-height: 90px !important;
+}
+
+/* Buttons */
+.stButton>button {
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 !important;
+}
+.stButton>button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* Columns (tight spacing) */
+[data-testid="column"] {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+}
+
+/* Alert styling */
+.stAlert {
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+}
+
+/* Radio spacing */
+.stRadio > div {
+    gap: 0.5rem;
+    font-size: 15px;
+}
+
+/* Divider line */
+hr {
+    margin: 1rem 0;
+    border: none;
+    height: 1px;
+    background: #e0e0e0;
+}

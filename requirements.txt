@@ -1,0 +1,6 @@
+pandas
+spacy==3.7.4
+scikit-learn
+imbalanced-learn
+clean-text
+joblib

@@ -32,6 +32,7 @@
 
 sms-spam-detector/
 ├── app.py  # Main Streamlit app
+
 ├── train.py  # Training script for base model
 ├── feedback_train.py  # Retrain model with feedback
 ├── requirements.txt  # Dependencies

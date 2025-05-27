@@ -78,7 +78,7 @@ python feedback_train.py  # Retrain with feedback
 
 ---
 
-###🙋‍♂️ Feedback & Contribution
+### 🙋‍♂️ Feedback & Contribution
 Have suggestions or want to contribute?
 
 Fork this repo
@@ -91,17 +91,17 @@ Open a Pull Request
 
 ---
 
-###🤖 Keywords for SEO
+### 🤖 Keywords for SEO
 sms spam detection, spam sms classifier, streamlit spam detector, python sms spam app, ham or spam message filter, naive bayes sms spam, nlp sms classification, retrainable spam classifier, machine learning spam detection project, github sms spam detection
 
 ---
 
-###📄 License
+### 📄 License
 This project is licensed under the MIT License.
 
 ---
 
-###📫 Contact
+### 📫 Contact
 Made by Mohammad Ziyafat Abbas
 
 

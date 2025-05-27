@@ -30,8 +30,9 @@
 
 ## 📂 Project Structure
 
+```
 sms-spam-detector/
-├── app.py                   # Main Streamlit app
+├── app.py                  # Main Streamlit app
 ├── train.py                # Training script for base model
 ├── feedback_train.py       # Retrain model with feedback
 ├── requirements.txt        # Project dependencies
@@ -45,6 +46,7 @@ sms-spam-detector/
 ├── data/
 │   ├── spam.csv             # Original dataset for training
 │   └── feedback.csv         # User feedback data for retraining
+```
 
 
 

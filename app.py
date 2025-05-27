@@ -62,7 +62,6 @@ def predict_spam(message):
 
 # --- Save Feedback to GitHub ---
 def save_feedback(message, prediction, correct_label):
-    # Prepare new entry
     entry = {
         "message": [message],
         "model_prediction": [prediction],
@@ -70,7 +69,6 @@ def save_feedback(message, prediction, correct_label):
     }
     new_df = pd.DataFrame(entry)
 
-    # GitHub info
     GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
     GITHUB_USERNAME = st.secrets["GITHUB_USERNAME"]
     REPO_NAME = st.secrets["REPO_NAME"]
@@ -84,7 +82,6 @@ def save_feedback(message, prediction, correct_label):
         "Accept": "application/vnd.github.v3+json"
     }
 
-    # Step 1: Fetch existing file (if exists)
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         content = base64.b64decode(response.json()["content"]).decode()
@@ -92,18 +89,15 @@ def save_feedback(message, prediction, correct_label):
         existing_df = pd.read_csv(io.StringIO(content))
         updated_df = pd.concat([existing_df, new_df], ignore_index=True)
     elif response.status_code == 404:
-        # No file yet — start fresh
         updated_df = new_df
         sha = None
     else:
         st.error(f"❌ Error fetching file: {response.json()}")
         return
 
-    # Step 2: Convert to CSV and encode
     csv_data = updated_df.to_csv(index=False)
     encoded = base64.b64encode(csv_data.encode()).decode()
 
-    # Step 3: Prepare payload
     payload = {
         "message": "Update feedback.csv from Streamlit app",
         "content": encoded,
@@ -112,7 +106,6 @@ def save_feedback(message, prediction, correct_label):
     if sha:
         payload["sha"] = sha
 
-    # Step 4: Push update to GitHub
     put_response = requests.put(url, headers=headers, data=json.dumps(payload))
     if put_response.status_code in [200, 201]:
         st.success("✅ Feedback successfully saved to GitHub!")
@@ -153,7 +146,7 @@ def input_section():
     with col2:
         if st.button("🧹 Clear", use_container_width=True):
             st.session_state.clear()
-            st.rerun()
+            st.experimental_rerun()
 
 # --- Result Section ---
 def result_section():

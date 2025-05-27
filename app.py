@@ -7,7 +7,6 @@ st.set_page_config(
 )
 
 import pickle
-import spacy
 import pandas as pd
 from cleantext import clean
 from pathlib import Path
@@ -24,10 +23,6 @@ local_css("styles.css")
 
 # --- Load Models ---
 @st.cache_resource
-def load_spacy():
-    return spacy.load("en_core_web_sm")
-
-@st.cache_resource
 def load_models():
     with open("model/vectorizer.pkl", "rb") as f:
         vectorizer = pickle.load(f)
@@ -35,7 +30,6 @@ def load_models():
         model = pickle.load(f)
     return vectorizer, model
 
-nlp = load_spacy()
 vectorizer, model = load_models()
 
 # --- Preprocess ---
@@ -50,11 +44,11 @@ def preprocess(text):
         no_phone_numbers=True,
         no_numbers=True,
         no_currency_symbols=True,
-        no_punct=False,
+        no_punct=True,
         lang="en"
     )
-    doc = nlp(text)
-    return " ".join([token.lemma_ for token in doc if token.is_alpha])
+    tokens = [word for word in text.split() if word.isalpha()]
+    return " ".join(tokens)
 
 # --- Predict ---
 def predict_spam(message):

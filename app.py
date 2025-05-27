@@ -138,7 +138,7 @@ def input_section():
 
     col1, col2 = st.columns([1, 3])
     with col1:
-        if st.button("🔍 Analyze Message", use_container_width=True):
+        if st.button("🔍 Analyze", use_container_width=True):
             st.session_state.prediction = predict_spam(st.session_state.message_input)
             st.session_state.feedback_mode = False
             st.session_state.feedback_done = False
@@ -153,13 +153,14 @@ def result_section():
     pred = st.session_state.prediction
     message = st.session_state.message_input
 
+    # Show prediction in a more refined style
     if pred == 1:
-        st.error("## 🚨 Spam Detected!")
+        st.markdown('<div style="background-color:#ffe6e6;padding:12px;border-radius:8px;"><strong>🚨 Spam Detected!</strong></div>', unsafe_allow_html=True)
     else:
-        st.success("## ✅ Legitimate Message")
+        st.markdown('<div style="background-color:#e6f4ea;padding:12px;border-radius:8px;"><strong>✅ Legitimate Message</strong></div>', unsafe_allow_html=True)
 
-    st.markdown("---")
-    st.markdown("### 💬 Help Improve Our Service")
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown('<p style="font-size:18px;"><strong>💬 Help Improve Our Service</strong></p>', unsafe_allow_html=True)
     st.markdown("Was this classification correct?")
 
     col1, col2, _ = st.columns([1, 1, 2])
@@ -190,6 +191,7 @@ def result_section():
 
     else:
         st.success("✅ Feedback received. Thank you!")
+
 
 # --- Main App ---
 def main():

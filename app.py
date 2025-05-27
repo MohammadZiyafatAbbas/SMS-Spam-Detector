@@ -155,9 +155,9 @@ def result_section():
 
     # Show prediction in a more refined style
     if pred == 1:
-        st.markdown('<div style="background-color:#ffe6e6;padding:12px;border-radius:8px;"><strong>🚨 Spam Detected!</strong></div>', unsafe_allow_html=True)
+       st.markdown('<div class="result-box result-spam">🚨 Spam Detected!</div>', unsafe_allow_html=True)
     else:
-        st.markdown('<div style="background-color:#e6f4ea;padding:12px;border-radius:8px;"><strong>✅ Legitimate Message</strong></div>', unsafe_allow_html=True)
+       st.markdown('<div class="result-box result-legit">✅ Legitimate Message</div>', unsafe_allow_html=True)
 
     st.markdown("<hr>", unsafe_allow_html=True)
     st.markdown('<p style="font-size:18px;"><strong>💬 Help Improve Our Service</strong></p>', unsafe_allow_html=True)

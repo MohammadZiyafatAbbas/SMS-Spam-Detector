@@ -79,10 +79,11 @@ python feedback_train.py  # Retrain with feedback
 ---
 
 ### 🙋‍♂️ Feedback & Contribution
+Have suggestions or want to contribute?
 
 ```
-Have suggestions or want to contribute?
 Fork this repo
+
 Create a branch: git checkout -b feature/your-feature
 Push to your branch: git push origin feature/your-feature
 Open a Pull Request

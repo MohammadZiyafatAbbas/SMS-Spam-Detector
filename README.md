@@ -31,19 +31,21 @@
 ## 📂 Project Structure
 
 sms-spam-detector/
-├── app.py  # Main Streamlit app
+├── app.py                   # Main Streamlit app
+├── train.py                # Training script for base model
+├── feedback_train.py       # Retrain model with feedback
+├── requirements.txt        # Project dependencies
+├── styles.css              # Custom styles for the app
+├── README.md               # Project documentation
 
-├── train.py  # Training script for base model
-├── feedback_train.py  # Retrain model with feedback
-├── requirements.txt  # Dependencies
-├── styles.css  # Custom styles
 ├── model/
-│ ├── spam_classifier.pkl
-│ └── vectorizer.pkl
+│   ├── spam_classifier.pkl  # Trained model file
+│   └── vectorizer.pkl       # Text vectorizer used in preprocessing
+
 ├── data/
-│ ├── spam.csv  # Original training data
-│ └── feedback.csv  # User feedback data
-└── README.md
+│   ├── spam.csv             # Original dataset for training
+│   └── feedback.csv         # User feedback data for retraining
+
 
 
 ---

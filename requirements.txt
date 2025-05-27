@@ -1,6 +1,5 @@
+streamlit
 pandas
-spacy==3.6.1
 scikit-learn
 clean-text
 joblib
-streamlit
